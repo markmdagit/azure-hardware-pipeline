@@ -75,7 +75,8 @@ def run_pipeline(input_csv_bytes: bytes) -> bytes:
         
         if unresolved and client:
             corrections = batch_resolve_dates(unresolved, client)
-            parsed = parsed.replace(corrections)
+            mask = parsed == "NEEDS_GEMINI"
+            parsed.loc[mask] = df.loc[mask, col].map(corrections).fillna("NEEDS_GEMINI")
         
         # Replace residual failure flags with null
         df[col] = parsed.replace("NEEDS_GEMINI", None)
