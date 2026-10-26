@@ -1,0 +1,19 @@
+{
+  "scriptFile": "__init__.py",
+  "bindings": [
+    {
+      "name": "myblob",
+      "type": "blobTrigger",
+      "direction": "in",
+      "path": "raw-logs/{name}",
+      "connection": "AzureWebJobsStorage"
+    },
+    {
+      "name": "outputblob",
+      "type": "blob",
+      "direction": "out",
+      "path": "clean-logs/{name}.parquet",
+      "connection": "AzureWebJobsStorage"
+    }
+  ]
+}
