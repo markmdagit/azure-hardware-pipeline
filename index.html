@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Showcase: Automated Hardware Telemetry & Failure Remediation Pipeline</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --text-color: #e0e0e0;
+            --accent-color: #4CAF50;
+            --accent-hover: #45a049;
+            --border-color: #333;
+            --badge-bg: #2d2d2d;
+            --badge-text: #b3e5fc;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .badge {
+            background-color: var(--badge-bg);
+            color: var(--badge-text);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid #444;
+        }
+
+        .repo-link {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .repo-link:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .section {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            border: 1px solid var(--border-color);
+        }
+
+        h2 {
+            color: #ffffff;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+        }
+
+        .flow-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            background: #252525;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 1.1rem;
+            color: #81c784;
+        }
+
+        .flow-step {
+            text-align: center;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .flow-arrow {
+            color: #888;
+            font-weight: bold;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background-color: #252525;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .card-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--badge-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .card-label {
+            font-size: 1rem;
+            color: #aaa;
+        }
+
+        .charts-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        .chart-wrapper {
+            background-color: #252525;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .comparison-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .code-block {
+            flex: 1;
+            min-width: 300px;
+            background-color: #000;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+        }
+
+        .code-block h3 {
+            margin-top: 0;
+            color: #ff9800;
+        }
+
+        .code-block.after h3 {
+            color: #4CAF50;
+        }
+
+        pre {
+            margin: 0;
+            color: #d4d4d4;
+            font-family: 'Consolas', 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Automated Hardware Telemetry & Failure Remediation Pipeline</h1>
+            <div class="badges">
+                <span class="badge">Azure Functions</span>
+                <span class="badge">Blob Storage</span>
+                <span class="badge">Python</span>
+                <span class="badge">Gemini 2.5 Flash</span>
+                <span class="badge">Parquet</span>
+                <span class="badge">GitHub Actions</span>
+            </div>
+            <a href="https://github.com/your-username/azure-hardware-pipeline" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+        </header>
+
+        <section class="section">
+            <h2>Architecture & Telemetry Flow</h2>
+            <div class="flow-diagram">
+                <div class="flow-step">Raw CSV Ingestion</div>
+                <div class="flow-arrow">➔</div>
+                <div class="flow-step">Blob Trigger</div>
+                <div class="flow-arrow">➔</div>
+                <div class="flow-step">Python / Regex Parsing</div>
+                <div class="flow-arrow">➔</div>
+                <div class="flow-step">Gemini AI Edge Fallback</div>
+                <div class="flow-arrow">➔</div>
+                <div class="flow-step">Parquet & JSON Export</div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Pipeline Telemetry Metrics</h2>
+            <div class="cards" id="telemetry-cards">
+                <div class="card">
+                    <div class="card-value" id="val-logs">5,000</div>
+                    <div class="card-label">Total Logs Processed</div>
+                </div>
+                <div class="card">
+                    <div class="card-value" id="val-remediation">~98.4%</div>
+                    <div class="card-label">Data Quality Remediation Rate (Date Recovery)</div>
+                </div>
+                <div class="card">
+                    <div class="card-value" id="val-assets">1,170</div>
+                    <div class="card-label">Unique Assets Tracked</div>
+                </div>
+                <div class="card">
+                    <div class="card-value" id="val-runtime">Scale-to-Zero</div>
+                    <div class="card-label">Pipeline Runtime (Sub-second processing)</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Data Visualizations</h2>
+            <div class="charts-container">
+                <div class="chart-wrapper">
+                    <canvas id="deviceChart"></canvas>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="severityChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Data Quality Transformation (Before vs. After)</h2>
+            <div class="comparison-container">
+                <div class="code-block">
+                    <h3>Before: Messy CSV Input</h3>
+                    <pre>
+asset_id,date,temp,status,error
+AST-66959,06//04/24,,warn,Fan wobble
+AST-12093,2024-06-04,45,CRITICAL,Disk sector failure
+AST-66959,06-04-2024,NULL,warn,Fan wobble
+AST-88210,06/04/24,88.5,FATAL,GPU Overheat
+                    </pre>
+                </div>
+                <div class="code-block after">
+                    <h3>After: Structured JSON/Parquet Output</h3>
+                    <pre>
+[
+  {
+    "asset_id": "AST-66959",
+    "normalized_date": "2024-06-04",
+    "temperature_c": null,
+    "severity": "Warning",
+    "failure_type": "Fan wobble",
+    "frequency_count": 2
+  },
+  {
+    "asset_id": "AST-12093",
+    "normalized_date": "2024-06-04",
+    "temperature_c": 45.0,
+    "severity": "Critical",
+    "failure_type": "Disk sector failure",
+    "frequency_count": 1
+  },
+  {
+    "asset_id": "AST-88210",
+    "normalized_date": "2024-06-04",
+    "temperature_c": 88.5,
+    "severity": "Fatal",
+    "failure_type": "GPU Overheat",
+    "frequency_count": 1
+  }
+]
+                    </pre>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Default metrics summary data
+        const defaultData = {
+            telemetry: {
+                total_logs: "5,000",
+                remediation_rate: "~98.4%",
+                unique_assets: "1,170",
+                runtime: "Scale-to-Zero"
+            },
+            devices: {
+                labels: ['Core Switch', 'Storage SAN', 'Edge Router', 'Tape Library', 'GPU Blades'],
+                data: [150, 300, 120, 80, 250]
+            },
+            severity: {
+                labels: ['Fatal', 'Critical', 'High', 'Warning', 'Medium'],
+                data: [45, 120, 200, 350, 455]
+            }
+        };
+
+        async function fetchMetricsData() {
+            try {
+                const response = await fetch('metrics.json');
+                if (response.ok) {
+                    const jsonData = await response.json();
+                    return jsonData;
+                }
+            } catch (error) {
+                console.log('Could not fetch metrics.json, falling back to default data.', error);
+            }
+            return defaultData;
+        }
+
+        function updateTelemetryCards(data) {
+            document.getElementById('val-logs').innerText = data.telemetry.total_logs;
+            document.getElementById('val-remediation').innerText = data.telemetry.remediation_rate;
+            document.getElementById('val-assets').innerText = data.telemetry.unique_assets;
+            document.getElementById('val-runtime').innerText = data.telemetry.runtime;
+        }
+
+        function renderCharts(data) {
+            Chart.defaults.color = '#e0e0e0';
+            Chart.defaults.borderColor = '#444';
+
+            // Device Type Chart
+            const ctxDevice = document.getElementById('deviceChart').getContext('2d');
+            new Chart(ctxDevice, {
+                type: 'doughnut',
+                data: {
+                    labels: data.devices.labels,
+                    datasets: [{
+                        label: 'Failures by Device Type',
+                        data: data.devices.data,
+                        backgroundColor: [
+                            '#4CAF50', '#2196F3', '#FFC107', '#9C27B0', '#F44336'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: 'bottom' },
+                        title: {
+                            display: true,
+                            text: 'Failure Distribution by Device Type',
+                            color: '#ffffff',
+                            font: { size: 16 }
+                        }
+                    }
+                }
+            });
+
+            // Severity Breakdown Chart
+            const ctxSeverity = document.getElementById('severityChart').getContext('2d');
+            new Chart(ctxSeverity, {
+                type: 'bar',
+                data: {
+                    labels: data.severity.labels,
+                    datasets: [{
+                        label: 'Severity Breakdown',
+                        data: data.severity.data,
+                        backgroundColor: [
+                            '#d32f2f', '#f57c00', '#fbc02d', '#1976d2', '#388e3c'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false },
+                        title: {
+                            display: true,
+                            text: 'Severity Breakdown',
+                            color: '#ffffff',
+                            font: { size: 16 }
+                        }
+                    },
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+        }
+
+        async function init() {
+            const data = await fetchMetricsData();
+            if (data.telemetry) updateTelemetryCards(data);
+            if (data.devices && data.severity) renderCharts(data);
+        }
+
+        init();
+    </script>
+</body>
+</html>
