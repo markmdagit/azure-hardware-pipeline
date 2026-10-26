@@ -98,3 +98,24 @@ def run_pipeline(input_csv_bytes: bytes) -> bytes:
     out_buffer = io.BytesIO()
     df.to_parquet(out_buffer, index=False)
     return out_buffer.getvalue()
+
+def generate_summary_metrics(df: pd.DataFrame) -> str:
+    """Calculates high-level metrics for dashboard consumption."""
+    summary = {
+        "metadata": {
+            "total_records_processed": int(len(df)),
+            "unique_assets": int(df["asset_id"].nunique()),
+            "last_pipeline_run": datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
+        },
+        "severity_distribution": df["severity"].value_counts(dropna=False).to_dict(),
+        "failures_by_device": df["device_type"].value_counts().head(8).to_dict(),
+        "top_failing_assets": (
+            df.groupby("asset_id")
+            .size()
+            .sort_values(ascending=False)
+            .head(5)
+            .to_dict()
+        ),
+        "avg_downtime_minutes": round(float(df["downtime_minutes"].mean()), 1)
+    }
+    return json.dumps(summary, indent=2)
